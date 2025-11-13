@@ -1,0 +1,861 @@
+{
+  "name": "Activation Bot",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -4608,
+        -432
+      ],
+      "id": "84dd4fda-e711-46d3-8eac-2f32e208e4cd",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1rJTCiN9GcJkeG7FN4hUHz_5cPMSqP14Ppm61LoTO4K4",
+          "mode": "list",
+          "cachedResultName": "Customer data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJTCiN9GcJkeG7FN4hUHz_5cPMSqP14Ppm61LoTO4K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1099751036,
+          "mode": "list",
+          "cachedResultName": "activation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJTCiN9GcJkeG7FN4hUHz_5cPMSqP14Ppm61LoTO4K4/edit#gid=1099751036"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -4320,
+        -432
+      ],
+      "id": "771f77d9-32cc-427b-b585-15b35454942a",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LZHDqeoO48Rqk2Sl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 5,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -3776,
+        -416
+      ],
+      "id": "9ce96a42-42ae-4b6d-bd2a-fb351e93ddfc",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1rJTCiN9GcJkeG7FN4hUHz_5cPMSqP14Ppm61LoTO4K4",
+          "mode": "list",
+          "cachedResultName": "Customer data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJTCiN9GcJkeG7FN4hUHz_5cPMSqP14Ppm61LoTO4K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1099751036,
+          "mode": "list",
+          "cachedResultName": "activation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJTCiN9GcJkeG7FN4hUHz_5cPMSqP14Ppm61LoTO4K4/edit#gid=1099751036"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "OwnerName": "={{ $json.retell_llm_dynamic_variables.OwnerName }}",
+            "Welcomecall": "Yes"
+          },
+          "matchingColumns": [
+            "OwnerName"
+          ],
+          "schema": [
+            {
+              "id": "OwnerName",
+              "displayName": "OwnerName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PhoneNumber",
+              "displayName": "PhoneNumber",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CompanyName",
+              "displayName": "CompanyName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Services",
+              "displayName": "Services",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Welcomecall",
+              "displayName": "Welcomecall",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2848,
+        -400
+      ],
+      "id": "5db2f945-0ff1-4c61-85fd-ab14109fa96e",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LZHDqeoO48Rqk2Sl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "activationagent",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -4256,
+        208
+      ],
+      "id": "56efb3e3-fe0f-4b85-9f11-a81c8b27e259",
+      "name": "Webhook",
+      "webhookId": "6e8eb86d-99b9-4055-8dd5-ff4492524b13"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -4048,
+        448
+      ],
+      "id": "0b26fe2b-1cca-4fd9-aee4-1c1b5330ca34",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Rm5vrlXnWOfWDTUb",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://chat.googleapis.com/v1/spaces/yq245sAAAAE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=g-hgJGbWszLu5hWuzDnQMIoTunHKAMWaOo9ovULMyh8",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.output.text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3232,
+        384
+      ],
+      "id": "87ea6314-e0e7-4351-b9c0-97550ba8623c",
+      "name": "Sending Summary g-chat"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1rJTCiN9GcJkeG7FN4hUHz_5cPMSqP14Ppm61LoTO4K4",
+          "mode": "list",
+          "cachedResultName": "Customer data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJTCiN9GcJkeG7FN4hUHz_5cPMSqP14Ppm61LoTO4K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1099751036,
+          "mode": "list",
+          "cachedResultName": "activation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJTCiN9GcJkeG7FN4hUHz_5cPMSqP14Ppm61LoTO4K4/edit#gid=1099751036"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Summary": "={{$json.text}}",
+            "OwnerName": "=Russell"
+          },
+          "matchingColumns": [
+            "OwnerName"
+          ],
+          "schema": [
+            {
+              "id": "OwnerName",
+              "displayName": "OwnerName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PhoneNumber",
+              "displayName": "PhoneNumber",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "CompanyName",
+              "displayName": "CompanyName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Services",
+              "displayName": "Services",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Welcomecall",
+              "displayName": "Welcomecall",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -3232,
+        208
+      ],
+      "id": "24cead31-d543-4980-b192-96b4b845cebb",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LZHDqeoO48Rqk2Sl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.body.call.recording_url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3232,
+        32
+      ],
+      "id": "bce89391-7589-44d6-8845-38143f3fa9c0",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=User: You will receive a variable called TRANSCRIPT below. Parse it and return a single JSON object following the schema exactly.\n\nTRANSCRIPT: {{ $json[\"transcript\"] }}\n\nREQUIRED JSON SCHEMA:\n{\n  \"call_id\": null,\n  \"client_confirmed\": {\n    \"full_name\": null,\n    \"email\": null,\n    \"phone\": null,\n    \"address\": null,\n    \"confirmation_text\": null,\n    \"confirmation_confidence\": \"\"\n  },\n  \"profiles\": [\n    {\n      \"platform\": \"\",\n      \"has_profile\": \"\",\n      \"profile_url\": null,\n      \"username\": null,\n      \"password\": null,\n      \"credential_confidence\": \"\",\n      \"evidence\": null\n    }\n  ],\n  \"other_notes\": null,\n  \"summary\": \"\"\n}\n\nRules:\n1. Do not fabricate values. If unclear, set to null.\n2. Extract credentials only if explicitly spoken. Mark credential_confidence:\n   - \"high\" if stated clearly.\n   - \"medium\" if somewhat ambiguous.\n   - \"low\" only if inferred (prefer null instead).\n3. For has_profile:\n   - \"yes\" if client confirms having one.\n   - \"no\" if explicitly denies.\n   - \"unknown\" if not mentioned.\n4. Include the exact transcript snippet in \"evidence\" for any extracted credentials or confirmations.\n5. Set confirmation_confidence:\n   - \"high\" for explicit confirmation,\n   - \"medium\" for implied,\n   - \"low\" for uncertain.\n6. Output valid JSON only (no markdown or commentary).\n7. If multiple profiles are mentioned, include each as a separate object in \"profiles\". If none, return [].\n8. Keep \"summary\" concise — 1–2 sentences summarizing call purpose and next steps.\n\nNow parse the transcript and return the JSON object following the schema exactly.\n",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=System: You are a precise data extractor. You will be given a call transcript. Your job is to extract confirmation details and any social/profile credentials the client verbally provided. Do not invent or guess values. If a value is not explicitly present in the transcript, return null for that field. Always return valid JSON and only JSON — no explanations.\n\nUser: You will receive a variable called TRANSCRIPT below. Parse it and return a single JSON object following the schema exactly.\n\nTRANSCRIPT: {{ $json[\"transcript\"] }}\n\nREQUIRED JSON SCHEMA:\n{\n  \"call_id\": null,\n  \"client_confirmed\": {\n    \"full_name\": null,\n    \"email\": null,\n    \"phone\": null,\n    \"address\": null,\n    \"confirmation_text\": null,\n    \"confirmation_confidence\": \"\"\n  },\n  \"profiles\": [\n    {\n      \"platform\": \"\",\n      \"has_profile\": \"\",\n      \"profile_url\": null,\n      \"username\": null,\n      \"password\": null,\n      \"credential_confidence\": \"\",\n      \"evidence\": null\n    }\n  ],\n  \"other_notes\": null,\n  \"summary\": \"\"\n}\n\nRules:\n1. Do not fabricate values. If unclear, set to null.\n2. Extract credentials only if explicitly spoken. Mark credential_confidence:\n   - \"high\" if stated clearly.\n   - \"medium\" if somewhat ambiguous.\n   - \"low\" only if inferred (prefer null instead).\n3. For has_profile:\n   - \"yes\" if client confirms having one.\n   - \"no\" if explicitly denies.\n   - \"unknown\" if not mentioned.\n4. Include the exact transcript snippet in \"evidence\" for any extracted credentials or confirmations.\n5. Set confirmation_confidence:\n   - \"high\" for explicit confirmation,\n   - \"medium\" for implied,\n   - \"low\" for uncertain.\n6. Output valid JSON only (no markdown or commentary).\n7. If multiple profiles are mentioned, include each as a separate object in \"profiles\". If none, return [].\n8. Keep \"summary\" concise — 1–2 sentences summarizing call purpose and next steps.\n\nNow parse the transcript and return the JSON object following the schema exactly.\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -3760,
+        -16
+      ],
+      "id": "14d6dbdd-5656-4ffe-8554-f22d46d933a1",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -2688,
+        -400
+      ],
+      "id": "7e2b2849-d8ce-4cb8-b93a-712066e69c8a",
+      "name": "Wait",
+      "webhookId": "aa1d2f93-5429-4c49-977a-ecae7a2d8298"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "typeVersion": 2.1,
+      "position": [
+        -3776,
+        208
+      ],
+      "id": "1ba96a2f-351c-472e-b903-b26b40fa6278",
+      "name": "Summarization Chain"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.retellai.com/v2/create-phone-call",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer key_8584ce1c03452c6a47ef50b3bd58"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{\n{\n\"from_number\": \"+12163409355\",\n\"to_number\": \"+1\" + $('Loop Over Items').item.json.PhoneNumber,\n\"override_agent_id\": \"agent_7c8df50cf857cd58da28b013fa\",\n\"metadata\": {\n\"OwnerName\": $('Loop Over Items').item.json.OwnerName\n},\n\"retell_llm_dynamic_variables\": {\n\"OwnerName\": $('Loop Over Items').item.json.OwnerName,\n\"CompanyName\": $('Loop Over Items').item.json.CompanyName,\n\"PhoneNumber\": \"+1\" + $('Loop Over Items').item.json.PhoneNumber,\n\"Email\": $('Loop Over Items').item.json.Email,\n\"Services\": $('Loop Over Items').item.json.Services,\n\"Address\": $('Loop Over Items').item.json.Address\n}\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2912,
+        -176
+      ],
+      "id": "b2d8da51-4dce-4004-a6ed-cbcae910d0f2",
+      "name": "calling bot",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "emailsendingurl",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -3936,
+        -176
+      ],
+      "id": "b37d5ff4-ac2a-42f5-9f19-c7c443fd89cc",
+      "name": "Webhook1",
+      "webhookId": "1d626c9d-efb6-46dd-be2a-b539c54da6e8"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "43976d42-e974-4330-8854-71ff0e596b38",
+              "leftValue": "={{ $json.Welcomecall }}",
+              "rightValue": "=Yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4064,
+        -432
+      ],
+      "id": "f9249d59-dc64-49a6-907f-d06bc8bb52f9",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.body.args.email }}",
+        "subject": "={{ $json.body.args.subject }}",
+        "message": "=<div style=\"font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #333; line-height: 1.6; max-width: 600px; margin: auto; padding: 25px; border: 1px solid #eaeaea; border-radius: 10px; background-color: #fafafa;\">      <!-- Company Logo -->   <div style=\"text-align:center; margin-bottom: 20px;\">     <img src=\"https://systematicitsolutions.com/wp-content/uploads/2024/08/header-logo.jpg\" alt=\"Systematic IT Solutions\" style=\"max-width: 180px;\">   </div>    <p>Hi <strong></strong>,</p>    <p>We’re excited to move forward with your onboarding process at <strong style=\"color:#e48f3f;\">Systematic IT Solutions</strong>! As part of your activation, we’ve attached an <strong>Access Document</strong> that provides simple step-by-step instructions on how to add <strong>Systematic IT Solutions</strong> as a business manager on your <strong>Google Business Profile</strong>.</p>    <p>This access allows our optimization and marketing team to manage your business presence effectively — ensuring smooth updates, better visibility, and improved local ranking.</p>    <p>📄 <strong>Access Document Link:</strong><br>     <a href=\"\" target=\"_blank\" style=\"color:#007BFF; text-decoration:none;\"></a>   </p>    <p>Please review the instructions carefully and complete the steps at your earliest convenience. If you have any questions or face any issues while following the document, simply reply to this email or reach out to our support team — we’ll be happy to assist you right away.</p>    <p>Thank you for your prompt cooperation — we’re thrilled to have you onboard and look forward to helping your business grow!</p>    <p style=\"margin-top: 25px;\">Warm regards,</p>    <!-- Signature + Logo -->   <p style=\"font-weight:bold; font-size:16px; color:#FFB100;\">Systematic IT Solutions</p>   <div style=\"margin-bottom: 10px;\">     <img src=\"https://systematicitsolutions.com/wp-content/uploads/2024/08/header-logo.jpg\" alt=\"Systematic IT Solutions\" style=\"max-width: 160px;\">   </div>    <p>     📞 <a href=\"tel:+16262170045\" style=\"color:#007BFF; text-decoration:none;\">(626) 217-0045</a><br>     ✉️ <a href=\"mailto:Info@systematicitsolutions.com\" style=\"color:#007BFF; text-decoration:none;\">Info@systematicitsolutions.com</a><br>     🌐 <a href=\"https://systematicitsolutions.com/\" target=\"_blank\" style=\"color:#007BFF; text-decoration:none;\">https://systematicitsolutions.com/</a>   </p>    <hr style=\"border:none; border-top:1px solid #ddd; margin:20px 0;\">    <p>💡 <em>Need assistance?</em><br>     <strong>Customer Support Manager:</strong><br> Russell Brandon<br>     📞 <a href=\"tel:+16262170045\" style=\"color:#007BFF; text-decoration:none;\">(626) 217-0045</a><br>     ✉️ <a href=\"mailto:Russell@systematicitsolutions.com\" style=\"color:#007BFF; text-decoration:none;\">Russell@systematicitsolutions.com</a>   </p> </div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -3680,
+        -176
+      ],
+      "id": "df2b5468-0188-4750-8087-077a0deb9e8f",
+      "name": "Send a message",
+      "webhookId": "76cc50f2-0c00-4fe1-9a49-9e4ba3350542",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "eJVAwxEuP2aTgo2C",
+          "name": "Reports Email Credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://chat.googleapis.com/v1/spaces/yq245sAAAAE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=g-hgJGbWszLu5hWuzDnQMIoTunHKAMWaOo9ovULMyh8",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"text\": \"Call is happening for the {{ $('Webhook1').item.json.body.args.email }}, access documents shared now\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3456,
+        -176
+      ],
+      "id": "d30897b2-32fd-446f-97ec-1a13c55048bb",
+      "name": "Update g-chat1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.retellai.com/v2/create-phone-call",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer key_84769712e0efa41d414ffe0fcb14"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{\n{\n\"from_number\": \"+12163409355\",\n\"to_number\": \"+1\" + $('Loop Over Items').item.json.PhoneNumber,\n\"override_agent_id\": \"agent_490ffb82e02c213a014a6db974\",\n\"metadata\": {\n\"OwnerName\": $('Loop Over Items').item.json.OwnerName\n},\n\"retell_llm_dynamic_variables\": {\n\"OwnerName\": $('Loop Over Items').item.json.OwnerName,\n\"CompanyName\": $('Loop Over Items').item.json.CompanyName,\n\"PhoneNumber\": \"+1\" + $('Loop Over Items').item.json.PhoneNumber,\n\"Email\": $('Loop Over Items').item.json.Email,\n\"Services\": $('Loop Over Items').item.json.Services,\n\"Address\": $('Loop Over Items').item.json.Address\n}\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3088,
+        -400
+      ],
+      "id": "5da10e1c-6866-466d-9a55-76bda81cd397",
+      "name": "agent"
+    },
+    {
+      "parameters": {
+        "sendTo": "=info@systematicitsolutions.com",
+        "subject": "=Your DocuSign and Access Documents Are Ready",
+        "message": "=<div style=\"font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #333; line-height: 1.6; max-width: 600px; margin: auto; padding: 25px; border: 1px solid #eaeaea; border-radius: 10px; background-color: #fafafa;\">\n  \n  <!-- Company Logo -->\n  <div style=\"text-align:center; margin-bottom: 20px;\">\n    <img src=\"https://systematicitsolutions.com/wp-content/uploads/2024/08/header-logo.jpg\" alt=\"Systematic IT Solutions\" style=\"max-width: 180px;\">\n  </div>\n\n  <p>Hi <strong>{{ $json['OwnerName'].split(\" \", 1) }}</strong>,</p>\n\n  <p>We’re excited to move forward with your onboarding process at <strong style=\"color:#e48f3f;\">Systematic IT Solutions</strong>! To complete the next step, please review and sign the DocuSign documents linked below.</p>\n\n  <p>📄 <strong>DocuSign Link:</strong><br>\n    <a href=\"{{ $json['DocuSign Link'] }}\" target=\"_blank\" style=\"color:#007BFF; text-decoration:none;\">{{ $json['DocuSign Link'] }}</a>\n  </p>\n\n  <p>Please ensure that all information is accurate before submitting. If you have any questions or need help with the signing process, feel free to reply to this email or reach out to our support team.</p>\n\n  <p>Thank you for your prompt attention — we’re looking forward to getting you fully onboarded!</p>\n\n  <p style=\"margin-top: 25px;\">Warm regards,</p>\n\n  <!-- Signature + Logo -->\n  <p style=\"font-weight:bold; font-size:16px; color:#FFB100;\"></p>\n  <div style=\"margin-bottom: 10px;\">\n    <img src=\"https://systematicitsolutions.com/wp-content/uploads/2024/08/header-logo.jpg\" alt=\"Systematic IT Solutions\" style=\"max-width: 160px;\">\n  </div>\n\n  <p>\n    📞 <a href=\"tel:+16262170045\" style=\"color:#007BFF; text-decoration:none;\">(626) 217-0045</a><br>\n    ✉️ <a href=\"mailto:Info@systematicitsolutions.com\" style=\"color:#007BFF; text-decoration:none;\">Info@systematicitsolutions.com</a><br>\n    🌐 <a href=\"https://systematicitsolutions.com/\" target=\"_blank\" style=\"color:#007BFF; text-decoration:none;\">https://systematicitsolutions.com/</a>\n  </p>\n\n  <hr style=\"border:none; border-top:1px solid #ddd; margin:20px 0;\">\n\n  <p>💡 <em>Need assistance?</em><br>\n    <strong>Customer Support Manager:</strong><br> Russell Brandon<br>\n    📞 <a href=\"tel:+16262170045\" style=\"color:#007BFF; text-decoration:none;\">(626) 217-0045</a><br>\n    ✉️ <a href=\"mailto:Russell@systematicitsolutions.com\" style=\"color:#007BFF; text-decoration:none;\">Russell@systematicitsolutions.com</a>\n  </p>\n</div>",
+        "options": {
+          "appendAttribution": false,
+          "ccList": "reports@systematicitsolutions.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -3296,
+        -400
+      ],
+      "id": "af8702f5-00fb-4183-ab0f-49ce5f783bc2",
+      "name": "DucuSign",
+      "webhookId": "946e7a5f-8ae1-43ca-8f94-2b1c6f7a1015",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "m1VPcMprMDT7czPO",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://chat.googleapis.com/v1/spaces/yq245sAAAAE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=g-hgJGbWszLu5hWuzDnQMIoTunHKAMWaOo9ovULMyh8",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"text\": \"Activation is happening for the {{ $json.CompanyName }}, docuSign already shared as well\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3536,
+        -400
+      ],
+      "id": "2673bb11-df60-47e4-87aa-687aea4b59ef",
+      "name": "Update g-chat"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Update g-chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Summarization Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Summarization Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sending Summary g-chat": {
+      "main": [
+        []
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarization Chain": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Sending Summary g-chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Update g-chat1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agent": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update g-chat": {
+      "main": [
+        [
+          {
+            "node": "DucuSign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DucuSign": {
+      "main": [
+        [
+          {
+            "node": "agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f63fba50-61f6-40e6-b3cf-58822c199b16",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d3f2ecae3412e9a08bbf5a59e7c354fcfbfa9c4cac52a37abdc7b87509678390"
+  },
+  "id": "Ck4lHQxU0Jvw520h",
+  "tags": []
+}
